@@ -16,11 +16,17 @@ class RoutineViewModel: ObservableObject {
                     self.routines = fetchedRoutines
                 }
             }
+//        self.routines = CoreDataManager.shared.fetchRoutines()
         }
     
     func addRoutine(title: String, descriptionroutine: String, date: Date) {
-        CoreDataManager.shared.saveRoutine(title: title, descriptionroutine: descriptionroutine, date: date, isCompleted: false)
-        FirebaseManager.shared.uploadRoutine(routine: routines.last!)
+        let newRoutine = CoreDataManager.shared.saveRoutine(
+            title: title,
+            descriptionroutine: descriptionroutine,
+            date: date,
+            isCompleted: false
+        )
+        FirebaseManager.shared.uploadRoutine(routine: newRoutine)
         loadRoutines()
     }
 }

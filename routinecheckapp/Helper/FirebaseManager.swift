@@ -13,19 +13,20 @@ class FirebaseManager {
     private let db = Firestore.firestore()
     
     func uploadRoutine(routine: Routine) {
+        let routineId = UUID().uuidString
         let routineData: [String: Any] = [
-            "id": routine.id?.uuidString ?? UUID().uuidString,
+            "id": routineId,
             "title": routine.title ?? "",
             "descriptionroutine": routine.descriptionroutine ?? "",
             "date": routine.date ?? Date(),
             "isCompleted": routine.isCompleted
         ]
         
-        db.collection("routines").document(routine.id?.uuidString ?? UUID().uuidString).setData(routineData) { error in
+        db.collection("routines").document(UUID().uuidString).setData(routineData) { error in
             if let error = error {
                 print("Error uploading to Firebase: \(error)")
             }
-            print("sucessfully added in firebase")
+            print("sucessfully added in firebase \(routineData)")
         }
     }
     

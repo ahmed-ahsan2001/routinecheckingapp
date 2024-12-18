@@ -21,7 +21,7 @@ class CoreDataManager {
                    }
                }
     }
-    func saveRoutine(title:String, descriptionroutine:String, date:Date , isCompleted:Bool){
+    func saveRoutine(title:String, descriptionroutine:String, date:Date , isCompleted:Bool)-> Routine{
         let context = persistentContainer.viewContext
         let routine = Routine(context: context)
         routine.id = UUID()
@@ -35,6 +35,7 @@ class CoreDataManager {
         }catch{
             print("Error Saving routine \(error)")
         }
+        return routine
     }
     func fetchRoutines() -> [Routine]{
         let context = persistentContainer.viewContext
